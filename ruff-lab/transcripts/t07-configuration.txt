@@ -1,0 +1,78 @@
+--- pyproject.toml ---
+[tool.ruff]
+line-length = 72
+
+[tool.ruff.lint]
+select = ["E501", "F"]
+
+[tool.ruff.lint.per-file-ignores]
+"long_lines.py" = ["E501"]
+
+$ ruff check .
+E501 Line too long (89 > 72)
+ --> tidy.py:2:73
+  |
+1 | def describe(item):
+2 |     note = "A short note about the item that still runs a little long for a narrow line."
+  |                                                                         ^^^^^^^^^^^^^^^^^
+3 |     return note
+  |
+
+Found 1 error.
+(exit code: 1)
+--- ruff.toml ---
+line-length = 100
+
+[lint]
+select = ["F401"]
+
+$ ruff check .
+F401 [*] `os` imported but unused
+ --> messy.py:1:8
+  |
+1 | import os
+  |        ^^
+2 | import sys
+3 | from collections import OrderedDict
+  |
+help: Remove unused import: `os`
+  |
+  - import os
+1 | import sys
+  |
+
+F401 [*] `sys` imported but unused
+ --> messy.py:2:8
+  |
+1 | import os
+2 | import sys
+  |        ^^^
+3 | from collections import OrderedDict
+  |
+help: Remove unused import: `sys`
+  |
+1 | import os
+  - import sys
+2 | from collections import OrderedDict
+  |
+
+F401 [*] `collections.OrderedDict` imported but unused
+ --> messy.py:3:25
+  |
+1 | import os
+2 | import sys
+3 | from collections import OrderedDict
+  |                         ^^^^^^^^^^^
+4 |
+5 | import json
+  |
+help: Remove unused import: `collections.OrderedDict`
+  |
+2 | import sys
+  - from collections import OrderedDict
+3 |
+  |
+
+Found 3 errors.
+[*] 3 fixable with `--fix`.
+(exit code: 1)

@@ -1,0 +1,47 @@
+$ ruff check --output-format github messy.py
+::error title=ruff (I001),file=/home/hatch/workspace/build-check/ruff-scratch/lab/fixtures/messy.py,line=1,endLine=5::messy.py:1:1: I001 Import block is un-sorted or un-formatted%0A  help: Organize imports
+::error title=ruff (F401),file=/home/hatch/workspace/build-check/ruff-scratch/lab/fixtures/messy.py,line=1,col=8,endLine=1,endColumn=10::messy.py:1:8: F401 `os` imported but unused%0A  help: Remove unused import: `os`
+::error title=ruff (F401),file=/home/hatch/workspace/build-check/ruff-scratch/lab/fixtures/messy.py,line=2,col=8,endLine=2,endColumn=11::messy.py:2:8: F401 `sys` imported but unused%0A  help: Remove unused import: `sys`
+::error title=ruff (F401),file=/home/hatch/workspace/build-check/ruff-scratch/lab/fixtures/messy.py,line=3,col=25,endLine=3,endColumn=36::messy.py:3:25: F401 `collections.OrderedDict` imported but unused%0A  help: Remove unused import: `collections.OrderedDict`
+::error title=ruff (F841),file=/home/hatch/workspace/build-check/ruff-scratch/lab/fixtures/messy.py,line=9,col=5,endLine=9,endColumn=17::messy.py:9:5: F841 Local variable `unused_total` is assigned to but never used%0A  help: Remove assignment to unused variable `unused_total`
+::error title=ruff (F841),file=/home/hatch/workspace/build-check/ruff-scratch/lab/fixtures/messy.py,line=21,col=13,endLine=21,endColumn=19::messy.py:21:13: F841 Local variable `result` is assigned to but never used%0A  help: Remove assignment to unused variable `result`
+::error title=ruff (F821),file=/home/hatch/workspace/build-check/ruff-scratch/lab/fixtures/messy.py,line=22,col=12,endLine=22,endColumn=19::messy.py:22:12: F821 Undefined name `results`
+::error title=ruff (E722),file=/home/hatch/workspace/build-check/ruff-scratch/lab/fixtures/messy.py,line=31,col=5,endLine=31,endColumn=11::messy.py:31:5: E722 Do not use bare `except`
+(exit code: 1)
+
+$ ruff check --output-format json clean.py messy.py | head -30
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 12,
+      "row": 5
+    },
+    "filename": "/home/hatch/workspace/build-check/ruff-scratch/lab/fixtures/messy.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import json\nimport os\nimport sys\nfrom collections import OrderedDict\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 8
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+
+$ ruff check --exit-zero messy.py
+Found 8 errors.
+[*] 4 fixable with `--fix` (2 unsafe fixes available with `--fix --unsafe-fixes`).
+(exit code: 0)

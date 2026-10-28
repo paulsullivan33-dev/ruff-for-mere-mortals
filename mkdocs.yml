@@ -1,0 +1,27 @@
+site_name: Ruff for Mere Mortals
+site_description: A fast Python linter and code formatter in a single tool. Checking code for real mistakes, fixing what can be fixed safely, formatting it consistently, and wiring the results into projects and pipelines, with the limits stated plainly.
+site_url: https://paulsullivan33-dev.github.io/ruff-for-mere-mortals/
+copyright: 'Part of <a href="https://paulsullivan33-dev.github.io/mere-mortals/">For Mere Mortals</a> · Text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT'
+
+# Guides live at the repo root (nice for GitHub browsing).
+# The deploy workflow copies them into docs/ before building.
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - What Ruff Is: what-ruff-is.md
+  - Installing Ruff: installing-ruff.md
+  - Your First Check: your-first-check.md
+  - Reading Diagnostics: reading-diagnostics.md
+  - Fixing, Safely: fixing-safely.md
+  - The Formatter: the-formatter.md
+  - Choosing Rules: choosing-rules.md
+  - Configuration: configuration.md
+  - Ruff in CI: ruff-in-ci.md
+  - Recipes: recipes.md
+  - The Neighbours: the-neighbours.md
+  - Limits: limits.md
+  - Troubleshooting: troubleshooting.md
+  - Glossary: glossary.md
+  - Writing Criteria: criteria.md

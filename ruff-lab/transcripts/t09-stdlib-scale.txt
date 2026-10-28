@@ -1,0 +1,20 @@
+$ time ruff check --statistics /usr/lib/python3.12
+   1	UP021  	[*] replace-universal-newlines
+   1	LOG015 	[ ] root-logger-call
+   1	PLC0205	[ ] single-string-slots
+   1	B026   	[ ] star-arg-unpacking-after-keyword-arg
+   1	PLR1722	[ ] sys-exit-alias
+   1	C413   	[*] unnecessary-call-around-sorted
+   1	C419   	[ ] unnecessary-comprehension-in-call
+   1	PLR1733	[*] unnecessary-dict-index-lookup
+   1	PLC3002	[ ] unnecessary-direct-lambda-call
+   1	C405   	[ ] unnecessary-literal-set
+   1	B015   	[ ] useless-comparison
+   1	PLC0414	[ ] useless-import-alias
+   1	UP009  	[*] utf8-encoding-declaration
+Found 5585 errors.
+[*] 1706 fixable with `--fix` (2419 unsafe fixes available with `--fix --unsafe-fixes`).
+
+real	0m3.755s
+user	0m0.848s
+sys	0m0.106s

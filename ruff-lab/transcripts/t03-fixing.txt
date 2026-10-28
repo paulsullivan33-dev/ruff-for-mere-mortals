@@ -1,0 +1,157 @@
+$ ruff check --fix --diff fixed.py
+--- fixed.py
++++ fixed.py
+@@ -1,6 +1,3 @@
+-import os
+-import sys
+-from collections import OrderedDict
+ 
+ import json
+ 
+
+Would fix 3 errors (2 additional fixes available with `--unsafe-fixes`).
+(exit code: 1)
+
+$ ruff check --fix fixed.py
+F841 Local variable `unused_total` is assigned to but never used
+ --> fixed.py:6:5
+  |
+5 | def load_config(path):
+6 |     unused_total = 0
+  |     ^^^^^^^^^^^^
+7 |     with open(path) as handle:
+8 |         data = json.load(handle)
+  |
+help: Remove assignment to unused variable `unused_total`
+  |
+5 | def load_config(path):
+  -     unused_total = 0
+6 |     with open(path) as handle:
+  |
+note: This is an unsafe fix and may change runtime behavior
+
+F841 Local variable `result` is assigned to but never used
+  --> fixed.py:18:13
+   |
+16 |             continue
+17 |         if user["active"] == True:
+18 |             result = user
+   |             ^^^^^^
+19 |     return results
+   |
+help: Remove assignment to unused variable `result`
+   |
+17 |         if user["active"] == True:
+   -             result = user
+18 +             pass
+19 |     return results
+   |
+note: This is an unsafe fix and may change runtime behavior
+
+F821 Undefined name `results`
+  --> fixed.py:19:12
+   |
+17 |         if user["active"] == True:
+18 |             result = user
+19 |     return results
+   |            ^^^^^^^
+
+E722 Do not use bare `except`
+  --> fixed.py:28:5
+   |
+26 |     try:
+27 |         value = int(flag)
+28 |     except:
+   |     ^^^^^^
+29 |         value = 0
+30 |     return value
+   |
+
+Found 7 errors (3 fixed, 4 remaining).
+2 unsafe fixes available with `--fix --unsafe-fixes`.
+(exit code: 1)
+
+--- fixed.py after --fix ---
+
+import json
+
+
+def load_config(path):
+    unused_total = 0
+    with open(path) as handle:
+        data = json.load(handle)
+    return data
+
+
+def find_user(users, wanted):
+    result = None
+    for user in users:
+        if user == None:
+            continue
+        if user["active"] == True:
+            result = user
+    return results
+
+
+double = lambda x: x * 2
+
+
+def risky(flag):
+    try:
+        value = int(flag)
+    except:
+        value = 0
+    return value
+
+$ ruff check --fix --unsafe-fixes fixed.py
+F821 Undefined name `results`
+  --> fixed.py:17:12
+   |
+15 |         if user["active"] == True:
+16 |             pass
+17 |     return results
+   |            ^^^^^^^
+
+E722 Do not use bare `except`
+  --> fixed.py:26:5
+   |
+24 |     try:
+25 |         value = int(flag)
+26 |     except:
+   |     ^^^^^^
+27 |         value = 0
+28 |     return value
+   |
+
+Found 5 errors (3 fixed, 2 remaining).
+(exit code: 1)
+
+--- fixed.py after --unsafe-fixes ---
+
+import json
+
+
+def load_config(path):
+    with open(path) as handle:
+        data = json.load(handle)
+    return data
+
+
+def find_user(users, wanted):
+    for user in users:
+        if user == None:
+            continue
+        if user["active"] == True:
+            pass
+    return results
+
+
+double = lambda x: x * 2
+
+
+def risky(flag):
+    try:
+        value = int(flag)
+    except:
+        value = 0
+    return value

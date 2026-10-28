@@ -1,0 +1,22 @@
+--- noqa_demo.py line 1 ---
+import os  # noqa: F401
+
+$ ruff check noqa_demo.py
+Found 7 errors.
+[*] 3 fixable with `--fix` (2 unsafe fixes available with `--fix --unsafe-fixes`).
+
+$ ruff check --add-noqa addnoqa_demo.py
+Added 7 noqa directives.
+(exit code: 0)
+
+--- addnoqa_demo.py after --add-noqa (first 6 lines) ---
+import os  # noqa: F401, I001
+import sys  # noqa: F401
+from collections import OrderedDict  # noqa: F401
+
+import json
+
+
+$ ruff check addnoqa_demo.py
+All checks passed!
+(exit code: 0)

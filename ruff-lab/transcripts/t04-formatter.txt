@@ -1,0 +1,86 @@
+$ ruff format --check toformat.py
+unformatted: File would be reformatted
+  --> toformat.py:1:11
+   |
+   - def greet( name , greeting = "hello" ):
+   -     message = greeting +   ", " + name+"!"
+1  + def greet(name, greeting="hello"):
+2  +     message = greeting + ", " + name + "!"
+3  |     return message
+4  |
+5  |
+6  | def total(prices):
+   -         total = 0
+   -         for price in prices: total += price
+   -         return total
+7  +     total = 0
+8  +     for price in prices:
+9  +         total += price
+10 +     return total
+11 +
+12 |
+   - print( greet("world") )
+   - print(total([1,2,3]))
+13 + print(greet("world"))
+14 + print(total([1, 2, 3]))
+   |
+
+1 file would be reformatted
+(exit code: 1)
+
+$ ruff format --diff toformat.py
+--- toformat.py
++++ toformat.py
+@@ -1,12 +1,14 @@
+-def greet( name , greeting = "hello" ):
+-    message = greeting +   ", " + name+"!"
++def greet(name, greeting="hello"):
++    message = greeting + ", " + name + "!"
+     return message
+ 
+ 
+ def total(prices):
+-        total = 0
+-        for price in prices: total += price
+-        return total
++    total = 0
++    for price in prices:
++        total += price
++    return total
++
+ 
+-print( greet("world") )
+-print(total([1,2,3]))
++print(greet("world"))
++print(total([1, 2, 3]))
+
+1 file would be reformatted
+(exit code: 1)
+
+$ ruff format toformat.py
+1 file reformatted
+(exit code: 0)
+
+--- toformat.py after formatting ---
+def greet(name, greeting="hello"):
+    message = greeting + ", " + name + "!"
+    return message
+
+
+def total(prices):
+    total = 0
+    for price in prices:
+        total += price
+    return total
+
+
+print(greet("world"))
+print(total([1, 2, 3]))
+
+$ ruff format --check toformat.py
+1 file already formatted
+(exit code: 0)
+
+$ ruff check toformat.py
+All checks passed!
+(exit code: 0)

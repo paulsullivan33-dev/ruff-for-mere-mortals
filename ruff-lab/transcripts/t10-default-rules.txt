@@ -1,0 +1,16 @@
+$ ruff check --show-settings clean.py  (rules enabled with no configuration)
+408 rules enabled by default, spanning (rule families counted from the same output):
+     47 PYI
+     42 UP
+     40 F
+     36 RUF
+     33 PLE
+     29 B
+     21 SIM
+     20 PLW
+     17 FURB
+     17 C
+     13 PLR
+     10 YTT
+     10 ASYNC
+      8 PLC
